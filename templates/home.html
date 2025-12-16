@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<h2>Сегодняшнее событие</h2>
+{% if today_events %}
+    <ul class="list_group">
+    {% for event in today_events %}
+        <li class="list_group_item">
+            <strong>{{event.title}}</strong>-{{event.datetime|date:"d.m.Y H:i"}}
+            <p>{{event.description|linebreaks}}</p>
+        </li>
+    {%endfor%}
+        </ul>
+    {%else%}
+        <p>Событий на сегодня нет</p>
+{%endif%}
+<hr>
+<h3>Поиск контакта</h3>
+<form method="get" action="{% url 'contact_list'%}">
+    <input type="text" name="q" class="form-control" placeholder="Введите ФИО или организацию">
+    <button type="submit" class="btn-2">Найти</button>
+</form>
+{%endblock%}
