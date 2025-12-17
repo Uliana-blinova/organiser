@@ -1,0 +1,17 @@
+{%  extends 'base.html' %}
+{%block content%}
+<h2>Мероприятия</h2>
+<a href="{% url 'event_create' %} " class="btn-3">+ Добавить мероприятие</a>
+{%for event in object_list%}
+<div class="main_cards">
+    <div class="card">
+        <h5>Название: {{event.title}}</h5>
+        <strong>Дата и время: {{event.datetime}} <br>
+        Описание: {{event.description|default: "-"}}
+        </strong>
+        <a href="{% url 'event_update' event.pk%}">Редактировать</a>
+        <a href="{% url 'event_delete' event.pk%}">Удалить</a>
+    </div>
+</div>
+{%endfor%}
+{%endblock%}

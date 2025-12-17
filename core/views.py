@@ -4,10 +4,22 @@ from django.urls import reverse_lazy
 from .models import Contact, Event
 from .forms import ContactForm, EventForm
 from django.utils import timezone
+from django.db.models import Q
 
 class ContactListView(ListView):
     model = Contact
     template_name = 'contact_list.html'
+    context_object_name = 'contacts'
+
+    def get_queryset(self):
+        queryset = Contact.objects.all()
+        q= self.request.GET.get('q')
+        if q:
+            queryset = queryset.filter(
+                Q(full_name__icontains=q) |
+                Q(organisation__icontains=q)
+            )
+        return queryset
 
 class ContactCreateView(CreateView):
     model = Contact

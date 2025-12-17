@@ -7,7 +7,7 @@
     <div class="card">
         <h5>{{contact.full_name}}</h5>
         <p>Телефон: {{contact.phone}} <br>
-            Организация: {{contact.organisation|default: "-"}} <br>
+            Организация: {{contact.organisation|default:"-"}} <br>
             {{contact.note|linebreaks}}</p>
         <a href="{% url 'contact_update' contact.pk %}" class="contact_update">Изменить</a>
         <a href="{% url 'contact_delete' contact.pk %}" class="contact_delete">Удалить</a>
